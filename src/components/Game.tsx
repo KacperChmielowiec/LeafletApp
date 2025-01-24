@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useReducer, useRef, useState } from "react"
 import { LatLngTuple } from "leaflet"
 import { MapContainer,TileLayer } from "react-leaflet"
 import styles from '../style/mystyle.module.css'
@@ -15,6 +15,58 @@ import MessageBoard from "./MessageBoard"
 import { modalUtils } from "../utils/modalUtils"
 import { useGameState } from "../providers/GameStateProvider"
 
+enum GameActionType
+{
+    SWITCH_MODAL,
+    SWITCH_POINT_STATE,
+    QUIZ_STATE,
+    GAME_START,
+    GAME_LEVEL,
+}
+
+type GameAction = 
+{
+   type: GameActionType.SWITCH_MODAL;
+   payload: boolean
+} |
+{
+  type: GameActionType.GAME_START;
+  payload: boolean
+} |
+{
+  type: GameActionType.GAME_LEVEL;
+  payload: number
+} |
+{
+  type: GameActionType.QUIZ_STATE;
+  payload: QuizState
+} |
+{
+  type: GameActionType.SWITCH_POINT_STATE;
+  payload: boolean
+}
+
+// Our reducer function that uses a switch statement to handle our actions
+function gameReducer(state: GameState, action: GameAction) : GameState  {
+  const { type, payload } = action;
+  switch(type)
+  {
+     case GameActionType.SWITCH_MODAL:
+        return {...state, modelOpen: payload}
+     case GameActionType.GAME_START:
+        return {...state,gameStarted: payload}
+     case GameActionType.GAME_LEVEL:
+        return {...state, currPoint: payload}
+     case GameActionType.QUIZ_STATE:
+        return {...state, quizState: payload}
+     case GameActionType.SWITCH_POINT_STATE:
+        return {...state,currPointActive: payload}
+     default:
+        throw new Error("error")
+  }
+}
+
+
 const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () => void } ) => {
   
   const { game, finishCallback } = props
@@ -23,6 +75,7 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
   const [position, setPosition] = useState<LatLngTuple>([0,0])
   const [draggable, setDraggable] = useState(true)
   const [gameState, setGameState] = useState<GameState>(props.gameState)
+  const [s,dispatch] = useReducer(gameReducer,props.gameState)
   const saveGameContext = useGameState()
 
 
@@ -47,13 +100,13 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
       rMachine.current.setWaypoints([]);
       
       if(!gameState.modelOpen && !gameState.gameStarted){
-          setGameState(prev => {return {...prev,modelOpen: true}})
-          modalUtils(showModal).showGameStartModal(startGame, () => {setGameState(prev => {return {...prev,modelOpen: false}})})
+          openModal()
+          modalUtils(showModal).showGameStartModal(startGame, () => {closeModal()})
       }
       if(!gameState.modelOpen && gameState.gameStarted && !gameState.currPointActive)
       {
-          setGameState(prev => {return {...prev,modelOpen: true}})
-          modalUtils(showModal).showQuizStartModal(gameState.currPoint,startQuiz,() => {setGameState(prev => {return {...prev,modelOpen: false}})})
+          openModal()
+          modalUtils(showModal).showQuizStartModal(gameState.currPoint,startQuiz,() => {closeModal()})
 
       }
     }
@@ -67,7 +120,9 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
   },[gameState])
 
   const startGame = () => {
-    setGameState((prev) => { return {...prev, gameStarted: true, currPoint: 1 }})
+    //setGameState((prev) => { return {...prev, gameStarted: true, currPoint: 1 }})
+    dispatch({type: GameActionType.GAME_START, payload: true})
+    dispatch({type: GameActionType.GAME_LEVEL, payload: 1})
   }
 
   const startQuiz = () => {
@@ -78,7 +133,9 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
         prevAnswers: []
      }
      const level = gameState.currPoint
-     setGameState( (prev) => { return {...prev, quizState: quiz, currPointActive: true } })
+     //setGameState( (prev) => { return {...prev, quizState: quiz, currPointActive: true } })
+     dispatch({type: GameActionType.QUIZ_STATE, payload: quiz})
+     dispatch({type: GameActionType.SWITCH_POINT_STATE, payload: true})
   }
   
  const inCurrPointScope = () => {
@@ -93,6 +150,12 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
        const point = game.gamePoints[gameState.currPoint]
        return isPointInCircle(position[0],position[1],point.lat,point.lng,15)
     }
+  }
+  const openModal = () => {
+    dispatch({type: GameActionType.SWITCH_MODAL, payload: true})
+  }
+  const closeModal = () => {
+    dispatch({type: GameActionType.SWITCH_MODAL, payload: false})
   }
 
   const typeCurrPoint = () => {
