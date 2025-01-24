@@ -2,7 +2,7 @@ import { FetchArgs,GameDTO } from "./types"
 import { GameMap } from "../pages/types"
 
 export const AppAPI = function () {
-    const BASE_PATH = "https://localhost:7035"
+    const BASE_PATH = "http://localhost:3001"
     return {
       getGamesList(
         options?: any
@@ -12,12 +12,14 @@ export const AppAPI = function () {
           BASE_PATH
         )
         return (basePath: string = BASE_PATH) => {
-          return fetch(localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-            if (response.status >= 200 && response.status < 300) {
-              return response.json()
-            } else {
-              throw response
-            }
+          return timeout(2000).then(r => {
+            return fetch(localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+              if (response.status >= 200 && response.status < 300) {
+                return response.json()
+              } else {
+                throw response
+              }
+            })
           })
         }
       },
@@ -28,6 +30,7 @@ export const AppAPI = function () {
           id
         )
         return (basePath: string = BASE_PATH) => {
+          return timeout(2000).then(r => {
           return fetch(localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
             if (response.status >= 200 && response.status < 300) {
               return response.json()
@@ -35,13 +38,14 @@ export const AppAPI = function () {
               throw response
             }
           })
+        })
         }
       }
     }
 }
             
 function getGamesListCreator(options: any = {}, baseURL: string): FetchArgs {
-    const localVarPath = '/api/games/list'
+    const localVarPath = '/list'
     const localVarUrlObj = new URL(localVarPath,baseURL)
     const localVarRequestOptions = Object.assign({ method: "GET" }, options)
 
@@ -62,7 +66,7 @@ function getGamesListCreator(options: any = {}, baseURL: string): FetchArgs {
 
 function getGameCreator(options: any = {}, baseURL: string, id: number): FetchArgs
 {
-    const localVarPath = `/api/games/${id}`
+    const localVarPath = `/game/${id}`
     const localVarUrlObj = new URL(localVarPath,baseURL)
     const localVarRequestOptions = Object.assign({ method: "GET" }, options)
 
@@ -81,4 +85,6 @@ function getGameCreator(options: any = {}, baseURL: string, id: number): FetchAr
     }
 }
 
-  
+function timeout(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
