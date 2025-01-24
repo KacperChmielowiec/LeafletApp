@@ -192,12 +192,6 @@ footer {
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .quiz-container,
-  .scoreboard-container {
-    width: 90%; /* Adjust width for smaller screens */
-    max-width: 90%; /* Ensure maximum width doesn't exceed screen size */
-  }
-
   h2 {
     font-size: 1.8em; /* Adjust font size */
   }
