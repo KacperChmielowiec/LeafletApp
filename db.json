@@ -1,0 +1,420 @@
+{
+    "list":[
+       {
+          "id":1,
+          "name":"Gra 1",
+          "desc":"Opis dla gry nr. 1 ( testowy )",
+          "mapPoints":10
+       },
+       {
+          "id":2,
+          "name":"Gra 2",
+          "desc":"Opis dla gry nr. 2 ( testowy )",
+          "mapPoints":10
+       },
+       {
+          "id":3,
+          "name":"Gra 3",
+          "desc":"Opis dla gry nr. 3 ( testowy )",
+          "mapPoints":10
+       }
+    ],
+    "game":[
+       {
+          "id":1,
+          "name":"Gra 1",
+          "desc":"",
+          "maxPoint":10,
+          "minPoints":10,
+          "gamePoints":[
+             {
+                "pointType":0,
+                "id":1,
+                "name":"start",
+                "mainDesc":"",
+                "lat":49.8008031276551,
+                "lng":19.046688079833988,
+                "level":1,
+                "placeDesc":[
+                   
+                ],
+                "placePopup":"",
+                "order":1,
+                "questions":null
+             },
+             {
+                "pointType":1,
+                "id":2,
+                "name":"point 1",
+                "mainDesc":"",
+                "lat":49.80301211871811,
+                "lng":19.047052860260013,
+                "level":2,
+                "placeDesc":[
+                   
+                ],
+                "placePopup":"",
+                "order":2,
+                "questions":{
+                   "maxPoint":3,
+                   "minPoint":3,
+                   "questions":[
+                      {
+                         "questionText":"Testowe pytanie 1 ?",
+                         "point":1,
+                         "correct":0,
+                         "answers":[
+                            "odp 1",
+                            "odp 2",
+                            "odp 3",
+                            "odp 4"
+                         ],
+                         "type":0
+                      }
+                   ]
+                }
+             },
+             {
+                "pointType":1,
+                "id":3,
+                "name":"point 3",
+                "mainDesc":"",
+                "lat":49.807621,
+                "lng":19.05584,
+                "level":3,
+                "placeDesc":[
+                   
+                ],
+                "placePopup":"",
+                "order":3,
+                "questions":{
+                   "maxPoint":3,
+                   "minPoint":3,
+                   "questions":[
+                      {
+                         "questionText":"Testowe pytanie 2?",
+                         "point":1,
+                         "correct":0,
+                         "answers":[
+                            "odp 1",
+                            "odp 2",
+                            "odp 3",
+                            "odp 4"
+                         ],
+                         "type":0
+                      },
+                      {
+                         "questionText":"Testowe pytanie 3?",
+                         "point":1,
+                         "correct":0,
+                         "answers":[
+                            "odp 1",
+                            "odp 2",
+                            "odp 3",
+                            "odp 4"
+                         ],
+                         "type":0
+                      }
+                   ]
+                }
+             },
+             {
+                "pointType":1,
+                "id":4,
+                "name":"point 4",
+                "mainDesc":"",
+                "lat":49.808769,
+                "lng":19.04631,
+                "level":4,
+                "placeDesc":[
+                   
+                ],
+                "placePopup":"",
+                "order":4,
+                "questions":{
+                   "maxPoint":3,
+                   "minPoint":3,
+                   "questions":[
+                      {
+                         "questionText":"Testowe pytanie 4 ?",
+                         "point":1,
+                         "correct":0,
+                         "answers":[
+                            "odp 1",
+                            "odp 2",
+                            "odp 3",
+                            "odp 4"
+                         ],
+                         "type":0
+                      }
+                   ]
+                }
+             }
+          ]
+       },
+       {
+        "id":2,
+        "name":"Gra 1",
+        "desc":"",
+        "maxPoint":10,
+        "minPoints":10,
+        "gamePoints":[
+           {
+              "pointType":0,
+              "id":1,
+              "name":"start",
+              "mainDesc":"",
+              "lat":49.8008031276551,
+              "lng":19.046688079833988,
+              "level":1,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":1,
+              "questions":null
+           },
+           {
+              "pointType":1,
+              "id":2,
+              "name":"point 1",
+              "mainDesc":"",
+              "lat":49.80301211871811,
+              "lng":19.047052860260013,
+              "level":2,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":2,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 1 ?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           },
+           {
+              "pointType":1,
+              "id":3,
+              "name":"point 3",
+              "mainDesc":"",
+              "lat":49.807621,
+              "lng":19.05584,
+              "level":3,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":3,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 2?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    },
+                    {
+                       "questionText":"Testowe pytanie 3?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           },
+           {
+              "pointType":1,
+              "id":4,
+              "name":"point 4",
+              "mainDesc":"",
+              "lat":49.808769,
+              "lng":19.04631,
+              "level":4,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":4,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 4 ?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           }
+        ]
+     },
+     {
+        "id":3,
+        "name":"Gra 1",
+        "desc":"",
+        "maxPoint":10,
+        "minPoints":10,
+        "gamePoints":[
+           {
+              "pointType":0,
+              "id":1,
+              "name":"start",
+              "mainDesc":"",
+              "lat":49.8008031276551,
+              "lng":19.046688079833988,
+              "level":1,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":1,
+              "questions":null
+           },
+           {
+              "pointType":1,
+              "id":2,
+              "name":"point 1",
+              "mainDesc":"",
+              "lat":49.80301211871811,
+              "lng":19.047052860260013,
+              "level":2,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":2,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 1 ?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           },
+           {
+              "pointType":1,
+              "id":3,
+              "name":"point 3",
+              "mainDesc":"",
+              "lat":49.807621,
+              "lng":19.05584,
+              "level":3,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":3,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 2?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    },
+                    {
+                       "questionText":"Testowe pytanie 3?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           },
+           {
+              "pointType":1,
+              "id":4,
+              "name":"point 4",
+              "mainDesc":"",
+              "lat":49.808769,
+              "lng":19.04631,
+              "level":4,
+              "placeDesc":[
+                 
+              ],
+              "placePopup":"",
+              "order":4,
+              "questions":{
+                 "maxPoint":3,
+                 "minPoint":3,
+                 "questions":[
+                    {
+                       "questionText":"Testowe pytanie 4 ?",
+                       "point":1,
+                       "correct":0,
+                       "answers":[
+                          "odp 1",
+                          "odp 2",
+                          "odp 3",
+                          "odp 4"
+                       ],
+                       "type":0
+                    }
+                 ]
+              }
+           }
+        ]
+     }
+    ]
+ }
