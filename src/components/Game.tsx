@@ -14,57 +14,8 @@ import { useLocalStorage } from "../hooks/useStorage"
 import MessageBoard from "./MessageBoard"
 import { modalUtils } from "../utils/modalUtils"
 import { useGameState } from "../providers/GameStateProvider"
+import { gameReducer, GameAction, GameActionType } from "./types"
 
-enum GameActionType
-{
-    SWITCH_MODAL,
-    SWITCH_POINT_STATE,
-    QUIZ_STATE,
-    GAME_START,
-    GAME_LEVEL,
-}
-
-type GameAction = 
-{
-   type: GameActionType.SWITCH_MODAL;
-   payload: boolean
-} |
-{
-  type: GameActionType.GAME_START;
-  payload: boolean
-} |
-{
-  type: GameActionType.GAME_LEVEL;
-  payload: number
-} |
-{
-  type: GameActionType.QUIZ_STATE;
-  payload: QuizState
-} |
-{
-  type: GameActionType.SWITCH_POINT_STATE;
-  payload: boolean
-}
-
-// Our reducer function that uses a switch statement to handle our actions
-function gameReducer(state: GameState, action: GameAction) : GameState  {
-  const { type, payload } = action;
-  switch(type)
-  {
-     case GameActionType.SWITCH_MODAL:
-        return {...state, modelOpen: payload}
-     case GameActionType.GAME_START:
-        return {...state,gameStarted: payload}
-     case GameActionType.GAME_LEVEL:
-        return {...state, currPoint: payload}
-     case GameActionType.QUIZ_STATE:
-        return {...state, quizState: payload}
-     case GameActionType.SWITCH_POINT_STATE:
-        return {...state,currPointActive: payload}
-     default:
-        throw new Error("error")
-  }
-}
 
 
 const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () => void } ) => {
@@ -74,8 +25,7 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
   const { showModal } = useModal()
   const [position, setPosition] = useState<LatLngTuple>([0,0])
   const [draggable, setDraggable] = useState(true)
-  const [gameState, setGameState] = useState<GameState>(props.gameState)
-  const [s,dispatch] = useReducer(gameReducer,props.gameState)
+  const [gameState,dispatch] = useReducer(gameReducer,props.gameState)
   const saveGameContext = useGameState()
 
 
@@ -120,7 +70,6 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
   },[gameState])
 
   const startGame = () => {
-    //setGameState((prev) => { return {...prev, gameStarted: true, currPoint: 1 }})
     dispatch({type: GameActionType.GAME_START, payload: true})
     dispatch({type: GameActionType.GAME_LEVEL, payload: 1})
   }
@@ -133,7 +82,6 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
         prevAnswers: []
      }
      const level = gameState.currPoint
-     //setGameState( (prev) => { return {...prev, quizState: quiz, currPointActive: true } })
      dispatch({type: GameActionType.QUIZ_STATE, payload: quiz})
      dispatch({type: GameActionType.SWITCH_POINT_STATE, payload: true})
   }
@@ -206,7 +154,9 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
           prevQuestion: [],
           prevAnswers: []
         }
-        setGameState((prev) => { return {...prev, quizState: quiz, currPoint: level + 1, currPointActive: false }})
+        dispatch({type: GameActionType.QUIZ_STATE, payload: quiz})
+        dispatch({type: GameActionType.GAME_LEVEL, payload: level + 1})
+        dispatch({type: GameActionType.SWITCH_POINT_STATE, payload: false})
     }
     else{
        gameState.gameFinished = true
@@ -216,7 +166,7 @@ const Game = ( props: { game: GameMap, gameState: GameState, finishCallback: () 
   }
 
   const updateQuizStateCallback = (state: QuizState) => {
-      setGameState(prev => {return {...prev, quizState: state }})
+      dispatch( {type: GameActionType.QUIZ_STATE, payload: state} )
   }
 
   const renderQuiz = () => {
